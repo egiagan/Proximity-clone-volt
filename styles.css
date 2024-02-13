@@ -1,0 +1,9 @@
+body{
+    font-family: "Kanit", sans-serif !important;
+   
+}
+
+#background{
+  background-image: url('https://images.pexels.com/photos/1524105/pexels-photo-1524105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: contain;
+}
