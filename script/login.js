@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyA9s5b2-OQA4wY3AwMFRt6qNOz-RYyth34",
   authDomain: "login-example-dff35.firebaseapp.com",
@@ -15,78 +15,81 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// Function to create spinner
+function createSpinner(button) {
+  const spinner = document.createElement('span');
+  spinner.classList.add('spinner-border', 'spinner-border-sm', 'ms-1');
+  button.appendChild(spinner);
+  return spinner;
+}
 
+// Function to remove spinner
+function removeSpinner(spinner) {
+  spinner.remove();
+}
 
-var submit = document.getElementById("login");
-
-submit.addEventListener("click", function (event) {
-  event.preventDefault(); // Prevent the default form submission
-
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("password").value;
-  var button = event.target; // Get the button that was clicked
-
-  if (!isValidEmail(email)) {
-    alert("Enter a valid email address");
-    return; // Exit the function early if email is not valid
-  }
-
-  if (password.length < 6) {
-    alert("Password must be at least 6 characters long");
-    return; // Exit the function early if password is too short
-  }
-
-  if (email === "" || password === "") {
-    alert("Fill All input fields");
-    return; // Exit the function early if any other field is empty
-  }
-
-  
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      window.location.href = "dashboard.html";
-      // Remove spinner
-      
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
-      // Remove spinner
-    
-    });
-
-});
-
+// Function to check if email is valid
 function isValidEmail(email) {
-  // Regular expression for validating email addresses
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-//reset password
+// Event listener for login button
+const submit = document.getElementById("login");
+submit.addEventListener("click", function (event) {
+  event.preventDefault(); // Prevent the default form submission
 
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const button = event.target; // Get the button that was clicked
+
+  if (!isValidEmail(email)) {
+    alert("Enter a valid email address");
+    return;
+  }
+
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters long");
+    return;
+  }
+
+  if (email === "" || password === "") {
+    alert("Fill All input fields");
+    return;
+  }
+
+  const spinner = createSpinner(button); // Start spinner animation
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      alert(errorMessage);
+    })
+    .finally(() => {
+      removeSpinner(spinner); // Remove spinner regardless of success or failure
+    });
+});
+
+// Event listener for reset password button
 const reset = document.getElementById("reset");
-
 reset.addEventListener("click", function () {
-  var email = document.getElementById("email").value;
-  if (email == "") {
+  const email = document.getElementById("email").value;
+  if (email === "") {
     alert("Please enter your email.");
   } else {
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        // Password reset email sent!
-        // ..
         alert("Password Reset Email Sent to " + email);
         window.location.reload();
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorMessage);
-        // ..
       });
   }
 });

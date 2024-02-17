@@ -1,9 +1,47 @@
-body{
-    font-family: "Kanit", sans-serif !important;
-   
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
 }
 
-#background{
-  background-image: url('https://images.pexels.com/photos/1524105/pexels-photo-1524105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+#background {
+
+  background-image: url('https://images.pexels.com/photos/907489/pexels-photo-907489.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
   background-size: contain;
+}
+
+
+
+.code {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.code textarea {
+  width: 100%;
+  min-height: 250px;
+  /* Changed 'PX' to 'px' */
+  background-color: #1f2937;
+  color: white;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+#output {
+  width: 100%;
+  background-color: white;
+  min-height: 850px;
+  border-radius: 5px;
+  border: 0;
+  outline: none;
+  padding: 20px;
+  box-shadow: rgba(36, 36, 36, 0.546) 0.5px 0.5px 5px;
+}
+
+.full-name{
+  text-transform: uppercase;
 }

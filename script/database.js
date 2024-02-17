@@ -30,29 +30,31 @@ document.getElementById("changeProfile").addEventListener("click", function () {
     const storageRefChild = storageRef(storage, 'some-child/' + file.name);
     uploadBytes(storageRefChild, file)
       .then((snapshot) => {
-        appendSpinner(document.getElementById("changeProfile"));
+
         console.log('Uploaded a blob or file!');
         // Get the download URL of the uploaded file
         getDownloadURL(storageRefChild)
           .then((url) => {
             console.log('File available at', url);
-            
+
             updateProfile(auth.currentUser, { photoURL: url })
               .then(() => {
-                removeSpinner(document.getElementById("changeProfile"));
+
                 // Update the UI with the new profile picture
-                const profile = document.getElementById("profile");
-                profile.style.backgroundImage = `url(${url})`;
+                const profiles = document.querySelectorAll(".profile-picture-main");
+                profiles.forEach(profile => {
+                  profile.src = `url(${url})`;
+                });
+
                 window.location.reload()
               })
               .catch((error) => {
-                removeSpinner(document.getElementById("changeProfile"));
+
                 console.error('Error updating profile:', error);
                 alert(error);
               });
           })
           .catch((error) => {
-            removeSpinner(document.getElementById("changeProfile"));
             console.error('Error getting download URL:', error);
             alert(error);
           });
@@ -67,17 +69,4 @@ document.getElementById("changeProfile").addEventListener("click", function () {
   }
 });
 
-// Function to create and append spinner
-function appendSpinner(button) {
-  const spinner = document.createElement('span');
-  spinner.classList.add('spinner-border', 'spinner-border-sm', 'ms-1');
-  button.appendChild(spinner);
-}
 
-// Function to remove spinner
-function removeSpinner(button) {
-  const spinner = button.querySelector('.spinner-border');
-  if (spinner) {
-    spinner.remove();
-  }
-}

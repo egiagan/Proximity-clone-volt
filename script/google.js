@@ -17,29 +17,12 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 auth.useDeviceLanguage();
 
-// Function to create spinner
-function createSpinner(button) {
-  const spinner = document.createElement('span');
-  spinner.classList.add('spinner-border', 'spinner-border-sm', 'ms-1');
-  button.appendChild(spinner);
-  return spinner;
-}
-
-// Function to remove spinner
-function removeSpinner(spinner) {
-  spinner.remove();
-}
 
 const google = document.getElementById("google");
 google.addEventListener("click", function (event) {
   // Prevent the default action of the click event
   event.preventDefault();
 
-  // Get the button that was clicked
-  var button = event.target;
-
-  // Add spinner to the button
-  const spinner = createSpinner(button);
 
   // Sign in with Google
   signInWithPopup(auth, provider)
@@ -53,8 +36,7 @@ google.addEventListener("click", function (event) {
       // ...
       alert("success");
       window.location.href = "dashboard.html";
-      // Remove spinner
-      removeSpinner(spinner);
+      
     })
     .catch((error) => {
       // Handle Errors here.
@@ -66,7 +48,6 @@ google.addEventListener("click", function (event) {
       const credential = GoogleAuthProvider.credentialFromError(error);
 
       alert(errorMessage);
-      // Remove spinner
-      removeSpinner(spinner);
+      
     });
 });
