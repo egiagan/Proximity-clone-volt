@@ -3,12 +3,13 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA9s5b2-OQA4wY3AwMFRt6qNOz-RYyth34",
-  authDomain: "login-example-dff35.firebaseapp.com",
-  projectId: "login-example-dff35",
-  storageBucket: "login-example-dff35.appspot.com",
-  messagingSenderId: "745268124885",
-  appId: "1:745268124885:web:8529e4339ca902e7ec565c"
+  apiKey: "AIzaSyDAlth1sxiP-S3r3fVDXhwadVVnEvpdO6s",
+  authDomain: "login-egi-agan.firebaseapp.com",
+  databaseURL: "https://login-egi-agan-default-rtdb.firebaseio.com",
+  projectId: "login-egi-agan",
+  storageBucket: "login-egi-agan.firebasestorage.app",
+  messagingSenderId: "395059466114",
+  appId: "1:395059466114:web:5c6b0621e9739df6b5c99b"
 };
 
 // Initialize Firebase
