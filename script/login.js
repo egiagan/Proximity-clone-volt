@@ -65,7 +65,7 @@ submit.addEventListener("click", function (event) {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      window.location.href = "1dashboard.html";
+      window.location.href = "/p/1my-account.html";
     })
     .catch((error) => {
       const errorMessage = error.message;
