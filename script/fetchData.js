@@ -62,7 +62,7 @@ onAuthStateChanged(auth, (user) => {
     userIds.innerText = uid || 56413561; // Default user ID if uid is empty
 
   } else {
-    window.location.href = "login.html";
+    window.location.href = "1login.html";
   }
 });
 
