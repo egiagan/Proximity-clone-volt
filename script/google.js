@@ -36,7 +36,7 @@ google.addEventListener("click", function (event) {
       // IdP data available using getAdditionalUserInfo(result)
       // ...
       alert("success");
-      window.location.href = "1dashboard.html";
+      window.location.href = "/p/1dashboard.html";
       
     })
     .catch((error) => {
